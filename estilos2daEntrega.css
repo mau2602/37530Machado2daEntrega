@@ -1,0 +1,92 @@
+
+body{
+    background: #E1CBC6;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
+#container{
+    width:100%;
+    margin: 0px auto;
+    border: 2px solid black;
+}
+header{
+    background: cadetblue;
+    height: 100px;
+    width: 100%;
+    margin: 0px;
+    text-align: center;
+    line-height: 100px;
+}
+nav{
+    background: lightblue;
+    height: 50px;
+}
+nav ul li{
+    float: left;
+    list-style: none;
+    margin: 10px;
+    line-height: 30px;
+}
+#content{
+    float:left;
+    width: 80%;
+}
+
+aside{
+    float:left;
+    width: 20%;
+    background: lightcyan;
+}
+#yamaha{
+    text-align: center;
+    float: left;
+}
+#honda{
+    text-align: center;
+    float: left;
+}
+#aprilia{
+    text-align: center;
+    float: left;
+}
+#kawasaki{
+    text-align: center;
+    float: left;
+}
+#vespa{
+    text-align: center;
+    float: left;
+}
+.clearfix{
+    clear:both;
+}
+#name{
+    padding-left: 10px ;
+}
+#mail{
+    padding-left: 10px ;
+}
+#bike{
+    padding-left: 10px ;
+}
+#weeks{
+    padding-left: 10px ;
+}
+#casco{
+    padding-left: 10px ;
+}
+#boton{
+    padding-left: 10px ;
+}
+#returnFinalPrice{
+    padding-left: 10px ;
+}
+#reservaEstado{
+    padding-left: 10px;
+}
+footer{
+    text-align: center;
+    background: indianred;
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+}
