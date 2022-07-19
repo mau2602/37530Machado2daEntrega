@@ -6,7 +6,7 @@ var correo1 = ""
 var weeksEntry = ""
 
 function show(){
-       
+      
         // Capturamos los datos del cliente y la reserva
         var nombre1 = document.getElementById("nombre1").value;
         var correo1 = document.getElementById("correo1").value;
@@ -26,8 +26,8 @@ function show(){
       this.disponible = true;
       this.eliminar = () => {
          this.disponible = false;
+        }
       }
-     }
     }
     // OBJETO YAMAHA
     const yamaha = new Moto ("Yamaha", "dMax", 300, 175);
@@ -39,7 +39,7 @@ function show(){
     const kawasaki = new Moto ("Kawasaki", "Ninja", 650, 400);
     //OBJETO VESPA
     const vespa = new Moto ("Vespa", "Primavera", 125, 125);
-    var bikeStock = [yamaha, honda, aprilia, kawasaki, vespa];
+
     // Asignacion del objeto moto a la eleccion del cliente
     if (bikes === 1){
         var moto = yamaha;
@@ -57,6 +57,7 @@ function show(){
          this.nombre = nombre;
          this.correo = correo;
          this.newMoto = null;
+
          this.addMoto = () => {
                 if ( moto.disponible ) {
                     this.newMoto = moto;
@@ -73,26 +74,31 @@ function show(){
     }
         const cliente1 = new Cliente(nombre1, correo1);
 
-     // Asignamos valor a la variable "extraHelmet" usando un operador ternario
-     extraHelmet === ("si") ? extraHelmet = 10 : extraHelmet = 0;
+    // Asignamos valor a la variable "extraHelmet" usando un operador ternario
+    extraHelmet === ("si") ? extraHelmet = 10 : extraHelmet = 0;
 
-     // obtenemos las fechas de alquiler y devolucion de la moto mediante libreria Luxon
+/*
+Incorporé la libreria  Luxon  para manipulación de fechas. ya que anteriormente usaba el objeto Date de JS y era 
+bastante extenso. Al usar Luxon logre el mismo resultado ahorrando cerca de 10 lineas de codigo.
+*/
     DateTime = luxon.DateTime;
     var fechaHoy = DateTime.now()
     fechaHoy = (fechaHoy.toFormat('dd LLL yyyy'));
     var devolucion = (DateTime.now().plus({ days: (weeksEntry * 7) }));
     devolucion = (devolucion.toFormat('dd LLL yyyy'));
-    //-------------------------------
-     cliente1.addMoto();
-     cliente1.informeInterno();
-    //-------------------------------
+    devolucion = devolucion.toLocaleString();
+   
+    //-----------------------------------------------------
+    cliente1.addMoto();
+    cliente1.informeInterno();
+    //-----------------------------------------------------
     // Mostramos el resumen de la reserva.
     var finalText = document.getElementById("returnFinalPrice");
     finalText.innerText = `¡Felicitaciones! 
 
      Has alquilado la moto ${cliente1.newMoto.marca} ${cliente1.newMoto.modelo} ${cliente1.newMoto.cilindrada}cc por ${weeksEntry} semana/s, en la ciudad de ${geoLoc}. El precio final es : $${((cliente1.newMoto.precio * weeksEntry) + extraHelmet)}`
-    
-     // Almacenamiento del objeto 'cliente' en localStorage.
+
+    // Almacenamiento del objeto 'cliente' en localStorage.
  
     var alqCliente = {"nombre": cliente1.nombre, "correo": cliente1.correo, "motoMarca": cliente1.newMoto.marca, "motoCilindrada": cliente1.newMoto.cilindrada, "fecha": devolucion}
     console.log(alqCliente)
@@ -117,13 +123,15 @@ function show(){
 
     Nombre y Apellido: ${clienteStr1.nombre} 
     Correo:  ${clienteStr1.correo} 
-    Moto- 
+    MOTO
     Marca: ${clienteStr1.motoMarca} 
     Cilindrada: ${ clienteStr1.motoCilindrada} 
     Fecha devolución: ${ clienteStr1.fecha}`);
 
-     // Mensaje de error con Sweet Alerts
-  
+/*    
+Anteriormente tenia una notificacion de error con un 'alert'. por lo que elegi reemplazarla por Sweet Alert
+y darle un aspecto mucho mas agradable.
+*/
 } else { 
         swal({
             title: "Error!",
@@ -132,11 +140,27 @@ function show(){
           });
     }
 }
+/*
+Agregué una notifiacion con Toastify al hacer click en el boton 'Reservar' que invita al usuario a clickear el boton 'volver arriba' 
+para poder visualizar un resumen de su reserva.
+*/
+const tostado = document.getElementById("boton");
+tostado.addEventListener("click", () => {
+   Toastify({
+       text: "Clickeá en el boton 'Volver arriba' \n para ver el resumen de tu reserva",
+       gravity: "bottom",
+       duration: 3000,
+       style: {
+           background: "light-blue",
+       }
+   }).showToast();
+})
+
 // Evento de teclado. ejecutamos la funcion 'show' con la tecla 'enter'
 document.addEventListener("keydown", function(event){
     const pressedEnter = event.key;
     if (pressedEnter == 'Enter'){
         show();
-     }
-   }
- )
+    }
+  }
+)
